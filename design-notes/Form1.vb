@@ -4,27 +4,16 @@ Public Class Form1
 
     Dim BridgeName, Place, RiverName, Angle, RiverWidth, BridgeSpan, BridgeWidthAll, WidthType As String
 
-
-
     Dim Word1 As Word.Application
-
-
 
     Dim CalcBook As Word.Document
 
-
-
     Dim table(100) As Word.Table
+
     Dim para(100) As Word.Paragraph
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
-
-    End Sub
-
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        Bridgename = TextBox1.Text
+        BridgeName = TextBox1.Text
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
@@ -39,6 +28,18 @@ Public Class Form1
         Angle = TextBox4.Text
     End Sub
 
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
+        RiverWidth = TextBox5.Text
+    End Sub
+
+    Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox6.TextChanged
+        BridgeSpan = TextBox6.Text
+    End Sub
+
+    Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
+        BridgeWidthAll = TextBox7.Text
+    End Sub
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -47,7 +48,7 @@ Public Class Form1
 
         Word1 = CreateObject("word.application")
 
-        CalcBook = CalcBook.Documents.Add
+        CalcBook = Word1.Documents.Add
         'MyDoc.PageSetup.
         MyRange = CalcBook.Range(Start:=0, End:=0)
 
