@@ -40,22 +40,47 @@ Public Class Form1
         BridgeWidthAll = TextBox7.Text
     End Sub
 
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If ComboBox1.Text = "单幅" Then
+            WidthType = 1
+        ElseIf ComboBox1.Text = "双幅" Then
+            WidthType = 2
+        End If
+    End Sub
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim MyRange As Word.Range
 
-
+        '启动word
         Word1 = CreateObject("word.application")
 
-        CalcBook = Word1.Documents.Add
-        'MyDoc.PageSetup.
-        MyRange = CalcBook.Range(Start:=0, End:=0)
+        '创建word文档，以指定的模板，可见
+        CalcBook = Word1.Documents.Add("DesignNotes.dotm", False, , True)
 
         'para2 = "道路等级：桥面按非机动车道设计。"
 
-        Word1.Visible = True
+        '文档激活
         CalcBook.Activate()
+
+        '页面设置采用A3，横向，分两栏
+        'With CalcBook.PageSetup
+        '.PaperSize = Word.WdPaperSize.wdPaperA3
+        '.Orientation = Word.WdOrientation.wdOrientLandscape
+        '.TextColumns.SetCount(2)
+        'End With
+
+        'With CalcBook.Styles("正文").Font
+        '.NameFarEast = "仿宋"
+        '.NameAscii="仿宋"
+        '.Name = "仿宋"
+        '.Size = 12
+        'End With
+
+        'With CalcBook.Styles("正文").ParagraphFormat
+        '.CharacterUnitFirstLineIndent = 2
+        'End With
+
 
         CalcBook.Content.InsertAfter(BridgeName)
 
