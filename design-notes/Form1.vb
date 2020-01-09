@@ -1,5 +1,5 @@
 ﻿Imports Microsoft.Office.Interop '声明1
-'Imports Microsoft.Office.Interop.Word '声明2
+Imports Microsoft.Office.Interop.Word '声明2
 Public Class Form1
 
     Dim BridgeName, Place, RiverName, Angle, RiverWidth, BridgeSpan, BridgeWidthAll, WidthType As String
@@ -7,8 +7,6 @@ Public Class Form1
     Dim Word1 As Word.Application
 
     Dim CalcBook As Word.Document
-
-    Dim ActiveRange As Word.Range
 
     Dim table(100) As Word.Table
 
@@ -52,6 +50,8 @@ Public Class Form1
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim ActiveRange As Word.Range
 
         '启动word
         Word1 = CreateObject("word.application")
@@ -129,10 +129,11 @@ Public Class Form1
         ActiveRange.Start = ActiveRange.End
 
         ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("土层描述内容" & Chr(13))
+        ActiveRange.InsertAfter("技术标准内容" & Chr(13))
         ActiveRange.Start = ActiveRange.End
 
 
+        'CalcBook.ApplyListTemplate
     End Sub
 
 
