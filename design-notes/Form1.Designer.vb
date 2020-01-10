@@ -30,6 +30,7 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -40,7 +41,6 @@ Partial Class Form1
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -122,6 +122,17 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "项目基本资料"
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"单幅", "双幅"})
+        Me.ComboBox1.Location = New System.Drawing.Point(77, 203)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ComboBox1.Size = New System.Drawing.Size(88, 20)
+        Me.ComboBox1.TabIndex = 17
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -199,17 +210,6 @@ Partial Class Form1
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(100, 21)
         Me.TextBox3.TabIndex = 7
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"单幅", "双幅"})
-        Me.ComboBox1.Location = New System.Drawing.Point(77, 203)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ComboBox1.Size = New System.Drawing.Size(88, 20)
-        Me.ComboBox1.TabIndex = 17
         '
         'Form1
         '

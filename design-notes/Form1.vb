@@ -2,7 +2,7 @@
 Imports Microsoft.Office.Interop.Word '声明2
 Public Class Form1
 
-    Dim BridgeName, Place, RiverName, Angle, RiverWidth, BridgeSpan, BridgeWidthAll, WidthType As String
+    Dim BridgeName, Place, RiverName, Angle, RiverWidth, BridgeSpan, BridgeWidthAll, BridgeAllLong, WidthType As String
 
     Dim Word1 As Word.Application
 
@@ -10,7 +10,7 @@ Public Class Form1
 
     'Dim table(100) As Word.Table
 
-    'Dim para(100) As Word.Paragraph
+    Dim para(100) As String
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         BridgeName = TextBox1.Text
@@ -41,13 +41,9 @@ Public Class Form1
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If ComboBox1.Text = "单幅" Then
-            WidthType = 1
-        ElseIf ComboBox1.Text = "双幅" Then
-            WidthType = 2
-        End If
+        ComboBox1.SelectedIndex = 1
+        WidthType = ComboBox1.Text
     End Sub
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -64,6 +60,9 @@ Public Class Form1
         CalcBook.Activate()
 
         Dim ActiveRange As Word.Range
+        Dim InsertContent As String
+
+        InsertContent = Nothing
 
         '页面设置采用A3，横向，分两栏
         'With CalcBook.PageSetup
@@ -87,52 +86,22 @@ Public Class Form1
 
         'CalcBook.Content.InsertAfter("本次设计" & BridgeName & "位于" & Place & "，跨越" & RiverName & "，桥梁中心线与河道中心线成" & Angle)
 
-        '第一章，工程概况
-        ActiveRange.Style = CalcBook.Styles("标题 1")
-        ActiveRange.InsertAfter("工程概况" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
+        GenContent(1, "工程概况")
+        para(1) = "本次设计" & BridgeName & "位于" & Place & "，跨越" & RiverName & "，桥梁中心线与河道中心线成" & Angle & "°角斜交，河道宽约" & RiverWidth & "m，桥梁采用" & BridgeSpan & "布跨，桥梁总长" & BridgeAllLong & "m，桥面全宽" & BridgeWidthAll & "m，按" & WidthType & "设计。"
+        GenContent(0, para(1))
 
-        ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("本次设计" & BridgeName & "位于" & Place & "，跨越" & RiverName & "，桥梁中心线与河道中心线成" & Angle & Chr(13))
-        ActiveRange.Start = ActiveRange.End
+        GenContent(1, "设计规范及依据")
+        GenContent(0, "规范及依据内容")
 
-        '第二章，设计规范及依据
-        ActiveRange.Style = CalcBook.Styles("标题 1")
-        ActiveRange.InsertAfter("设计规范及依据" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
+        GenContent(1, "初步设计批复意见执行情况")
+        GenContent(0, Chr(13))
 
-        ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("规范内容" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
+        GenContent(1, "工程地质")
 
-        '第三章，批复执行情况
-        ActiveRange.Style = CalcBook.Styles("标题 1")
-        ActiveRange.InsertAfter("初步设计批复意见执行情况" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
 
-        ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("批复内容及回复" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
 
-        '第四章，工程地质
-        ActiveRange.Style = CalcBook.Styles("标题 1")
-        ActiveRange.InsertAfter("工程地质" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
-
-        ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("土层描述内容" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
-
-        '第五章，主要技术标准
-        ActiveRange.Style = CalcBook.Styles("标题 1")
-        ActiveRange.InsertAfter("主要技术标准" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
-
-        ActiveRange.Style = CalcBook.Styles("正文")
-        ActiveRange.InsertAfter("技术标准内容" & Chr(13))
-        ActiveRange.Start = ActiveRange.End
-
-        GenContent(1, "插入内容测试")
+        'InsertContent = "你说你还是喜欢孤单，其实你怕被我看穿"
+        'GenContent(0, InsertContent)
 
         'CalcBook.Paragraphs.Add()
 
@@ -175,6 +144,7 @@ Public Class Form1
         ActiveRange.InsertAfter(ContentWords)
 
         GenContent = 0
+
     End Function
 
 End Class
