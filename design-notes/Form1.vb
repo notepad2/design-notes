@@ -8,9 +8,9 @@ Public Class Form1
 
     Dim CalcBook As Word.Document
 
-    Dim table(100) As Word.Table
+    'Dim table(100) As Word.Table
 
-    Dim para(100) As Word.Paragraph
+    'Dim para(100) As Word.Paragraph
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         BridgeName = TextBox1.Text
@@ -51,19 +51,19 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim ActiveRange As Word.Range
+        'Dim InsertTitle, InsertContent As String
 
         '启动word
         Word1 = CreateObject("word.application")
 
         '创建word文档，以指定的模板，可见
-        CalcBook = Word1.Documents.Add("DesignNotes.dotm", False, , True)
-
-        'para2 = "道路等级：桥面按非机动车道设计。"
+        CalcBook = Word1.Documents.Add("DesignNotes.dotm", False, 0, True)
 
         '文档激活，可见
         Word1.Visible = True
         CalcBook.Activate()
+
+        Dim ActiveRange As Word.Range
 
         '页面设置采用A3，横向，分两栏
         'With CalcBook.PageSetup
@@ -132,9 +132,49 @@ Public Class Form1
         ActiveRange.InsertAfter("技术标准内容" & Chr(13))
         ActiveRange.Start = ActiveRange.End
 
+        GenContent(1, "插入内容测试")
 
-        'CalcBook.ApplyListTemplate
+        'CalcBook.Paragraphs.Add()
+
+
+        'ActiveRange.ListFormat.ApplyNumberDefault()
+
+
     End Sub
 
+
+    '函数，在文档末尾按格式插入文字内容，0为正文，123为标题123，4、5为自动编号正文，6为无间隔居中。
+    Private Function GenContent(ByVal ContentType As Integer, ByVal ContentWords As String)
+
+        Dim ActiveRange As Word.Range
+
+        ActiveRange = CalcBook.Range(0, CalcBook.Sections.Last.Range.End)
+        ActiveRange.Start = ActiveRange.End
+
+        If ActiveRange.Start <> 0 Then
+            ActiveRange.InsertAfter(Chr(13))
+            ActiveRange.Start = ActiveRange.End
+        End If
+
+        If ContentType = 0 Then
+            ActiveRange.Style = CalcBook.Styles("正文")
+        ElseIf ContentType = 1 Then
+            ActiveRange.Style = CalcBook.Styles("标题 1")
+        ElseIf ContentType = 2 Then
+            ActiveRange.Style = CalcBook.Styles("标题 2")
+        ElseIf ContentType = 3 Then
+            ActiveRange.Style = CalcBook.Styles("标题 3")
+        ElseIf ContentType = 4 Then
+            ActiveRange.Style = CalcBook.Styles("正文编号1、")
+        ElseIf ContentType = 5 Then
+            ActiveRange.Style = CalcBook.Styles("正文编号a）")
+        ElseIf ContentType = 6 Then
+            ActiveRange.Style = CalcBook.Styles("无间隔")
+        End If
+
+        ActiveRange.InsertAfter(ContentWords)
+
+        GenContent = 0
+    End Function
 
 End Class
