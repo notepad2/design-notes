@@ -79,7 +79,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>My Project\appicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\appicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

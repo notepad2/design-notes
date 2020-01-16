@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop '声明1
 Imports Microsoft.Office.Interop.Word '声明2
+'Imports System.Resources
 Public Class Form1
 
     Dim BridgeName, Place, RiverName, Angle, RiverWidth, BridgeSpan, BridgeWidthAll, BridgeAllLong, WidthType As String
@@ -50,10 +51,12 @@ Public Class Form1
         'Dim InsertTitle, InsertContent As String
 
         '启动word
+
         Word1 = CreateObject("word.application")
 
         '创建word文档，以指定的模板，可见
-        CalcBook = Word1.Documents.Add("DesignNotes.dotm", False, 0, True)
+        CalcBook = Word1.Documents.Add("DesignNotes.dotm", False, , )
+        'CalcBook = Word1.Documents.Open("E:\source.code\design-notes\design-notes\design-notes\Resources\DesignNotes.dotm")
 
         '文档激活，可见
         Word1.Visible = True
